@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textSize="16sp"
-    android:textColor="@color/white"
-    android:fontFamily="@font/rubik_light">
-
-</TextView>
+    android:fontFamily="@font/rubik_medium"
+    android:gravity="end"
+    android:textColor="@color/white"/>
