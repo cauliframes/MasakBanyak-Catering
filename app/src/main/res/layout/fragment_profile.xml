@@ -24,59 +24,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/rubik_light"
-                android:gravity="center_horizontal"
-                android:text="Foto Profil"
-                app:layout_constraintBottom_toTopOf="@id/cateringAvatarImageView"
-                app:layout_constraintEnd_toEndOf="@id/cateringAvatarImageView"
-                app:layout_constraintStart_toStartOf="@id/cateringAvatarImageView" />
-
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/cateringAvatarImageView"
-                android:layout_width="88dp"
-                android:layout_height="88dp"
+                android:layout_width="114dp"
+                android:layout_height="114dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="30dp"
                 android:src="@drawable/ic_camera_alt_black_24dp"
                 app:civ_border_color="@color/colorPrimaryDark"
-                app:civ_border_width="2.5dp"
-                app:layout_constraintEnd_toStartOf="@+id/cateringRating"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:civ_border_width="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/rubik_light"
-                android:gravity="center_horizontal"
-                android:text="Rating Catering"
-                app:layout_constraintBottom_toTopOf="@id/cateringRating"
-                app:layout_constraintEnd_toEndOf="@id/cateringRating"
-                app:layout_constraintStart_toStartOf="@id/cateringRating" />
-
-            <me.itangqi.waveloadingview.WaveLoadingView
-                android:id="@+id/cateringRating"
-                android:layout_width="88dp"
-                android:layout_height="88dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="30dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/cateringAvatarImageView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:wlv_borderColor="@color/colorPrimaryDark"
-                app:wlv_borderWidth="2.5dp"
-                app:wlv_titleCenterStrokeColor="@color/colorAccent"
-                app:wlv_waveColor="@color/colorPrimary" />
 
 
             <TextView
@@ -91,7 +52,7 @@
             <EditText
                 android:id="@+id/cateringName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="31dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
@@ -104,8 +65,8 @@
                 android:text="Nama Catering"
                 android:textColor="@android:color/tab_indicator_text"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/namaCatering"
-                app:layout_constraintTop_toBottomOf="@id/cateringRating" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cateringAvatarImageView" />
 
             <TextView
                 android:id="@+id/tvAlamatCatering"

@@ -50,6 +50,10 @@ public class CateringViewModel extends ViewModel {
   public void refreshCatering() {
     repository.refreshCatering();
   }
+
+  public void updateCatering(Catering catering){
+  	repository.updateCatering(catering);
+	}
   
   public void refreshPackets() {
     repository.refreshPackets();
@@ -63,7 +67,7 @@ public class CateringViewModel extends ViewModel {
     repository.addPacket(packet);
   }
   
-  public void editPacket(Packet packet) {
+  public void updatePacket(Packet packet) {
   
   }
   
