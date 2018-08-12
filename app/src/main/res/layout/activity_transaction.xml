@@ -9,12 +9,15 @@
 
     <include layout="@layout/content_transaction" />
 
-    <android.support.design.widget.FloatingActionButton
+    <Button
         android:id="@+id/cancelTransactionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
+        android:layout_gravity="bottom|center"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_cancel_white_24dp" />
+        android:background="@drawable/background_07"
+        android:text="Cancel"
+        android:textColor="@color/white"
+        android:fontFamily="@font/rubik_bold"/>
 
 </android.support.design.widget.CoordinatorLayout>

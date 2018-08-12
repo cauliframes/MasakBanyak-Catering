@@ -75,7 +75,7 @@ public interface MasakBanyakWebService {
   Call<ResponseBody> uploadAvatar(
       @Header("Authorization") String authorization,
       @Path("id") String catering_id,
-      @Part() MultipartBody.Part image
+      @Part() MultipartBody.Part file
   );
   
   @GET("/caterings/{id}/packets")
@@ -90,6 +90,21 @@ public interface MasakBanyakWebService {
   @GET("/packets/{id}")
   Call<Packet> getPacketById(@Header("Authorization") String authorization, @Path("id") String packet_id);
   
+  @Multipart
+  @POST("/packets/{id}/image")
+  Call<ResponseBody> uploadPacketImage(
+      @Header("Authorization") String authorization,
+      @Path("id") String packet_id,
+      @Part() MultipartBody.Part file,
+      @Part("code") int code
+  );
+  
+  @PUT("/packets/{id}")
+  Call<ResponseBody> updatePacket(@Header("Authorization") String authorization, @Path("id") String packet_id, @Body Packet packet);
+  
   @GET("/customers/{id}")
   Call<Customer> getCustomer(@Header("Authorization") String authorization, @Path("id") String customer_id);
+  
+  @POST("/orders/{id}/cancel")
+  Call<ResponseBody> cancelOrder(@Header("Authorization") String authorization, @Path("id") String order_id);
 }

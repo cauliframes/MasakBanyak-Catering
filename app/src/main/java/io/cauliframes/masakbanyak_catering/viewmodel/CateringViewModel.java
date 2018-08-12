@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import io.cauliframes.masakbanyak_catering.model.Catering;
-import io.cauliframes.masakbanyak_catering.model.Order;
 import io.cauliframes.masakbanyak_catering.model.Packet;
 import io.cauliframes.masakbanyak_catering.repository.CateringRepository;
 import io.cauliframes.masakbanyak_catering.util.Util;
@@ -27,7 +26,7 @@ public class CateringViewModel extends ViewModel {
     this.repository = repository;
     this.cateringLiveData = repository.getCateringLiveData();
     this.packetsLiveData = repository.getPacketsLiveData();
-    this.notificationLiveData = repository.getNotificationLiveData();
+    this.notificationLiveData = repository.getNotificationEventLiveData();
   }
   
   public LiveData<Catering> getCateringLiveData() {
@@ -50,7 +49,11 @@ public class CateringViewModel extends ViewModel {
   public void refreshCatering() {
     repository.refreshCatering();
   }
-
+  
+  public void uploadCateringAvatar(Catering catering, String filename, byte[] file){
+    repository.uploadCateringAvatar(catering, filename, file);
+  }
+  
   public void updateCatering(Catering catering){
   	repository.updateCatering(catering);
 	}
@@ -63,12 +66,16 @@ public class CateringViewModel extends ViewModel {
     repository.refreshPacket(packet_id);
   }
   
+  public void uploadPacketImage(Packet packet, String filename, byte[] file, int code){
+    repository.uploadPacketImage(packet, filename, file, code-2);
+  }
+  
   public void addPacket(Packet packet) {
     repository.addPacket(packet);
   }
   
   public void updatePacket(Packet packet) {
-  
+    repository.updatePacket(packet);
   }
   
   public void deletePacket(Packet packet) {

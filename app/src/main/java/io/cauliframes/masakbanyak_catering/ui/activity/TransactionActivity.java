@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import io.cauliframes.masakbanyak_catering.di.Components;
 import io.cauliframes.masakbanyak_catering.model.Order;
 import io.cauliframes.masakbanyak_catering.model.Packet;
 import io.cauliframes.masakbanyak_catering.viewmodel.CateringViewModel;
+import io.cauliframes.masakbanyak_catering.viewmodel.OrderViewModel;
 import io.cauliframes.masakbanyak_catering.viewmodel.ViewModelFactory;
 
 public class TransactionActivity extends AppCompatActivity {
@@ -29,6 +31,7 @@ public class TransactionActivity extends AppCompatActivity {
   @Inject
   ViewModelFactory mViewModelFactory;
   
+  private OrderViewModel mOrderViewModel;
   private CateringViewModel mCateringViewModel;
   
   private Order mOrder;
@@ -45,6 +48,7 @@ public class TransactionActivity extends AppCompatActivity {
   private TextView mTime;
   private TextView mAddress;
   private LinearLayout mContents;
+  private Button mCancelTransactionButton;
   
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +58,11 @@ public class TransactionActivity extends AppCompatActivity {
     Components.getSessionComponent().inject(this);
   
     mOrder = (Order) getIntent().getSerializableExtra("order");
-    mCateringViewModel = ViewModelProviders.of(this, mViewModelFactory).get(CateringViewModel.class);
   
+    mOrderViewModel = ViewModelProviders.of(this, mViewModelFactory).get(OrderViewModel.class);
+    mCateringViewModel = ViewModelProviders.of(this, mViewModelFactory).get(CateringViewModel.class);
+    
+    mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
     mRefreshLayout = findViewById(R.id.refreshLayout);
     mStatus = findViewById(R.id.transactionStatusTextView);
     mBank = findViewById(R.id.bankTextView);
@@ -66,7 +73,10 @@ public class TransactionActivity extends AppCompatActivity {
     mTime = findViewById(R.id.timeTextView);
     mAddress = findViewById(R.id.addressTextView);
     mContents = findViewById(R.id.packetContentsLayout);
-  
+    mCancelTransactionButton = findViewById(R.id.cancelTransactionButton);
+    
+    mCancelTransactionButton.setVisibility(View.INVISIBLE);
+    
     mRefreshLayout.setRefreshing(true);
     mRefreshLayout.setOnRefreshListener(() -> mCateringViewModel.refreshPacket(mOrder.getPacket_id()));
   
@@ -88,9 +98,26 @@ public class TransactionActivity extends AppCompatActivity {
         content.setText(mPacket.getContents().get(i));
         mContents.addView(content);
       }
-    
+  
+      if(mOrder.getStatus().toLowerCase().equals("pending")){
+        mCancelTransactionButton.setOnClickListener(view -> mOrderViewModel.cancelOrder(mOrder));
+        mCancelTransactionButton.setVisibility(View.VISIBLE);
+      }
+      
       mRefreshLayout.setRefreshing(false);
     });
+    
+    mOrderViewModel.getNotificationEventLiveData().observe(this, notificationEvent -> {
+      String notification = notificationEvent.getContentIfNotHandled();
+      
+      if(notification != null){
+        showResponse(notification);
+      }
+    });
+  }
+  
+  public void showResponse(String response) {
+    Snackbar.make(mCoordinatorLayout, response, Snackbar.LENGTH_SHORT).show();
   }
   
 }

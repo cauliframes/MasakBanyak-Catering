@@ -96,7 +96,7 @@ public class AddPacketActivity extends AppCompatActivity {
       String notification = notificationEvent.getContentIfNotHandled();
   
       if (notification != null) {
-        Snackbar.make(mCoordinatorLayout, notification, Snackbar.LENGTH_LONG).show();
+        showResponse(notification);
       }
     });
   }
